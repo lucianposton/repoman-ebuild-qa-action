@@ -1,0 +1,40 @@
+name: 'Repoman Ebuild QA'
+description: 'Run repoman to find ebuild QA issues'
+inputs:
+    repoman_args:
+        description: >
+            Additional arguments to pass after `repoman full`.
+            Defaults to `-dx`. Note: This parameter will undergo shell
+            wordsplitting and globbing.
+        default: '-dx'
+    path:
+        description: >
+            Path to cd to before starting repoman. The path is relative
+            to the checked out repository. If unspecified or empty,
+            repoman runs in the root of the repository.
+        default: ''
+    portage_version:
+        description: >
+            The portage version to download containing repoman e.g.
+            `2.3.80`. `latest` is the default value, which uses the latest
+            released version.
+        default: 'latest'
+    profile:
+        description: >
+            The gentoo profile to set before running repoman. The default
+            value is `latest`, which will result in using the first
+            profile in `profiles.desc` listed under `SYMLINK_LIB=no`
+            e.g. `default/linux/amd64/17.1`.
+        default: 'latest'
+    gentoo_repo:
+        description: >
+            Location to install the gentoo ebuild repository. This could
+            be useful if using an old portage version that expects a
+            different location. Default value is `/var/db/repos/gentoo`.
+        default: '/var/db/repos/gentoo'
+runs:
+    using: 'docker'
+    image: 'Dockerfile'
+branding:
+    color: 'purple'
+    icon: 'search'
