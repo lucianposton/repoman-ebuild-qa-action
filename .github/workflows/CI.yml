@@ -1,0 +1,12 @@
+name: 'Continuous Integration'
+on: [push, pull_request]
+jobs:
+    shellcheck:
+        name: 'Shellcheck'
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Check out the code'
+              uses: actions/checkout@v1
+
+            - name: 'Run Shellcheck'
+              uses: azohra/shell-linter@v0.2.0
